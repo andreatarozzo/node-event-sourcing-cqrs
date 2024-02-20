@@ -1,0 +1,48 @@
+[
+  {
+    "type": "AmountDepositedEvent",
+    "transaction_id": "1234",
+    "receiver_id": "4",
+    "receiver_account_id": "4",
+    "terminal_id": "2",
+    "branch_id": "2",
+    "amount": 10,
+    "timestamp": "2022-02-02T17:52:39.000Z",
+    "data": {}
+  },
+  {
+    "type": "AmountDepositedEvent",
+    "transaction_id": "2",
+    "receiver_id": "2",
+    "receiver_account_id": "2",
+    "terminal_id": "2",
+    "branch_id": "2",
+    "amount": 10000.12,
+    "timestamp": "2022-02-02T17:52:39.000Z",
+    "data": {}
+  },
+  {
+    "type": "AmountDepositedEvent",
+    "transaction_id": "1",
+    "receiver_id": "1",
+    "receiver_account_id": "1",
+    "terminal_id": "2",
+    "branch_id": "2",
+    "amount": 10000.12,
+    "timestamp": "2022-02-02T17:52:39.000Z",
+    "data": {}
+  },
+  {
+    "type": "AmountTransferredEvent",
+    "transaction_id": "1",
+    "sender_id": "1",
+    "sender_account_id": "1",
+    "receiver_id": "2",
+    "receiver_account_id": "2",
+    "terminal_id": "1",
+    "branch_id": "1",
+    "amount": 10,
+    "timestamp": "2022-02-07T17:53:39.000Z",
+    "data": {}
+  }
+]

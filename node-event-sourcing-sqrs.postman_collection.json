@@ -1,0 +1,546 @@
+{
+  "info": {
+    "_postman_id": "b404ecd1-be61-4f25-8c2c-cec6c3015288",
+    "name": "node-event-sourcing-sqrs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set(\"token\", jsonData.token);",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"user_id\": \"test\",\n    \"password\": \"test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/auth/v1/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["auth", "v1", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Commands",
+      "item": [
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Create New User",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.collectionVariables.set(\"user_id\", jsonData.events_saved[0].user_id);",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"CreateNewUserCommand\",\n    \"timestamp\": \"2022-02-06T17:53:39.000Z\",\n    \"user_name\": \"Test Postman User\",\n    \"data\": {\n        \"address\": \"Test Address\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/command/user/v1/create-new-user",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["command", "user", "v1", "create-new-user"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Change User Address",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"ChangeUserAddressCommand\",\n    \"timestamp\": \"2022-02-06T17:53:39.000Z\",\n    \"user_name\": \"Test Postman User\",\n    \"user_id\": \"{{user_id}}\",\n    \"data\": {\n        \"address\": \"New New Address\",\n        \"previous_address\": \"New Address\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/command/user/v1/change-user-address",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["command", "user", "v1", "change-user-address"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Accounts",
+          "item": [
+            {
+              "name": "Create New Account",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.collectionVariables.set(\"account_id\", jsonData.account_events_saved[0].account_id);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"CreateNewAccountCommand\",\n    \"timestamp\": \"2022-02-06T17:53:39.000Z\",\n    \"owner_id\": \"{{user_id}}\",\n    \"branch_id\": \"1\",\n    \"terminal_id\": \"1\",\n    \"is_active\": true,\n    \"account_type\": \"private\",\n    \"data\": {\n        \"initial_balance\": 10\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/command/account/v1/create-new-account",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["command", "account", "v1", "create-new-account"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Change Account Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"ChangeAccountTypeCommand\",\n    \"timestamp\": \"2022-02-06T17:53:39.000Z\",\n    \"account_id\": \"{{account_id}}\",\n    \"owner_id\": \"{{user_id}}\",\n    \"branch_id\": \"1\",\n    \"is_active\": true,\n    \"account_type\": \"commercial\",\n    \"data\": {\n        \"previous_account_type\": \"private\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/command/account/v1/change-account-type",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["command", "account", "v1", "change-account-type"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Transactions",
+          "item": [
+            {
+              "name": "Deposit Amount",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"DepositAmountCommand\",\n    \"timestamp\": \"2022-02-06T17:53:39.000Z\",\n    \"receiver_id\": \"{{user_id}}\",\n    \"receiver_account_id\": \"{{account_id}}\",\n    \"amount\": 100,\n    \"terminal_id\": \"1\",\n    \"branch_id\": \"1\",\n    \"data\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/command/transaction/v1/deposit-amount",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["command", "transaction", "v1", "deposit-amount"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Transfer Amount",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"TransferAmountCommand\",\n    \"timestamp\": \"2022-02-06T17:53:39.000Z\",\n    \"sender_id\": \"{{user_id}}\",\n    \"sender_account_id\": \"{{account_id}}\",\n    \"receiver_id\": \"2\",\n    \"receiver_account_id\": \"2\",\n    \"amount\": 10.12,\n    \"terminal_id\": \"1\",\n    \"branch_id\": \"1\",\n    \"data\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/command/transaction/v1/transfer-amount",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["command", "transaction", "v1", "transfer-amount"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Queries",
+      "item": [
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Get User Profile History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/user/v1/get-user-profile-history?user_id=",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["query", "user", "v1", "get-user-profile-history"],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get User Accounts Info",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/account/v1/get-user-accounts-info?user_id={{user_id}}",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["query", "user", "v1", "get-user-accounts-info"],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "{{user_id}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get User Transactions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/user/v1/get-user-transactions?user_id={{user_id}}",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["query", "user", "v1", "get-user-transactions"],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "{{user_id}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Accounts",
+          "item": [
+            {
+              "name": "Get Account Full History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/account/v1/get-account-full-history?account_id={{account_id}}",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": [
+                    "query",
+                    "account",
+                    "v1",
+                    "get-account-full-history"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "{{account_id}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Account Transaction History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/account/v1/get-account-transaction-history?account_id={{account_id}}",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": [
+                    "query",
+                    "account",
+                    "v1",
+                    "get-account-transaction-history"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "{{account_id}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Account Balance",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/account/v1/get-account-balance?account_id={{account_id}}",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": ["query", "account", "v1", "get-account-balance"],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "{{account_id}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Account Entity History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/account/v1/get-account-entity-history?account_id={{account_id}}",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": [
+                    "query",
+                    "account",
+                    "v1",
+                    "get-account-entity-history"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "{{account_id}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Transactions",
+          "item": [
+            {
+              "name": "Get Transaction By Transaction Id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:4000/query/transaction/v1/get-transaction-by-transaction-id?transaction_id=1as",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "4000",
+                  "path": [
+                    "query",
+                    "transaction",
+                    "v1",
+                    "get-transaction-by-transaction-id"
+                  ],
+                  "query": [
+                    {
+                      "key": "transaction_id",
+                      "value": "1as"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "account_id",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}

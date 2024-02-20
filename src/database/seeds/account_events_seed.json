@@ -1,0 +1,67 @@
+[
+  {
+    "type": "AccountCreatedEvent",
+    "account_id": "1",
+    "owner_id": "1",
+    "branch_id": "1",
+    "terminal_id": "1",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "account_type": "private",
+    "is_active": true,
+    "data": {
+      "initial_balance": 10000
+    }
+  },
+  {
+    "type": "AccountCreatedEvent",
+    "account_id": "2",
+    "owner_id": "2",
+    "branch_id": "2",
+    "terminal_id": "1",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "account_type": "private",
+    "is_active": true,
+    "data": {
+      "initial_balance": 10000
+    }
+  },
+  {
+    "type": "AccountCreatedEvent",
+    "account_id": "3",
+    "owner_id": "3",
+    "branch_id": "2",
+    "terminal_id": "1",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "account_type": "private",
+    "is_active": true,
+    "data": {
+      "initial_balance": 10000
+    }
+  },
+  {
+    "type": "AccountCreatedEvent",
+    "account_id": "4",
+    "owner_id": "4",
+    "branch_id": "2",
+    "terminal_id": "1",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "account_type": "private",
+    "is_active": true,
+    "data": {
+      "initial_balance": 10000
+    }
+  },
+  {
+    "type": "AccountTypeChangedEvent",
+    "account_id": "4",
+    "owner_id": "4",
+    "branch_id": "2",
+    "terminal_id": "1",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "account_type": "commercial",
+    "is_active": true,
+    "data": {
+      "previous_account_type": "private"
+    }
+  }
+]

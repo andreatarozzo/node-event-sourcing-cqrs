@@ -1,0 +1,76 @@
+[
+  {
+    "type": "UserCreatedEvent",
+    "user_id": "1",
+    "user_name": "John Barron",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "a"
+    }
+  },
+  {
+    "type": "UserCreatedEvent",
+    "user_id": "2",
+    "user_name": "Branden Gibson",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "b"
+    }
+  },
+  {
+    "type": "UserCreatedEvent",
+    "user_id": "3",
+    "user_name": "Rhonda Church",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "c"
+    }
+  },
+  {
+    "type": "UserCreatedEvent",
+    "user_id": "4",
+    "user_name": "Georgina Hazel",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "d"
+    }
+  },
+  {
+    "type": "UserCreatedEvent",
+    "user_id": "5",
+    "user_name": "Georgina Hazel Second",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "e"
+    }
+  },
+  {
+    "type": "UserAddressChangedEvent",
+    "user_id": "4",
+    "user_name": "Georgina Hazel",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "New Address",
+      "previous_address": "e"
+    }
+  },
+  {
+    "type": "UserCreatedEvent",
+    "user_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "user_name": "Test User",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "e"
+    }
+  },
+  {
+    "type": "UserAddressChangedEvent",
+    "user_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "user_name": "Georgina Hazel",
+    "timestamp": "2022-02-06T17:53:39.000Z",
+    "data": {
+      "address": "New Address",
+      "previous_address": "e"
+    }
+  }
+]
