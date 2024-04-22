@@ -69,6 +69,7 @@ To have this sample project running in your local machine use docker-compose.
 docker-compose build && docker-compose up
 ```
 
+
 A postman collection is also present within the repo to make it easy to play around with the project.
 
 ## **System Routes**
